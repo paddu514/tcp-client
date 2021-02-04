@@ -1,0 +1,58 @@
+package main 
+import ( 
+	"iog"
+	   "net"
+)
+  type cliengt struct{
+      conn  net.conn
+      nick  string
+      room  *room
+      commands  chan <-  command
+  }
+
+  func (c *client) readInput()
+    for {
+        mag, err := bufio.newReader(C.conn).ReadString("\n)
+        if err! = nil {
+            return
+        }
+        msg = strings.Trim(msg,"\n")
+        args := strings.split(msg,"")
+        cmd  := strings.Trimspace (args[0])
+         
+         switch cmd {
+             case"\nick":
+                  c.commmand <- command {
+                      id : CHD_NICK,
+                      client = c,
+                      args : args,
+                  }
+             case"\room":
+                c.command <- command {
+                    id : CHD_ROOM,
+                    client = c,
+					args : c,
+}
+             case"\msg":
+                    c.command <- command {
+                        id : CHD_ROOM,
+                        client = c,
+						args = c,
+}
+             case"\quit":
+                c.command <- command {
+                    id : CHD_QUIT,
+                    client = c,
+                    args = c,
+}
+             default:
+                 c.err(fmt.error("unknown command: %s",cmd))
+}
+}
+}
+  func (c *client) err (err error) {
+    c. conn.writer([]byte("ERR:" +err.Error()+"\n"))
+}
+    func (c *client) msg(msg string) {
+        c.conn.write([]byte(">" +msg +"\n"))
+}
